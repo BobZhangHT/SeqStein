@@ -1,7 +1,7 @@
 # SeqStein
 A Sequential Stein's Method for Faster Training of Additive Index Models 
 
-# Installation:
+**Installation**
 
 ```
 pip install git+https://github.com/BobZhangHT/SeqStein.git
