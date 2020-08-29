@@ -245,7 +245,6 @@ class SeqStein(BaseEstimator, RegressorMixin):
             fig.add_subplot(ax2)
             subfig_idx += 1
             
-        #plt.show()
         if max_ids > 0:
             if save_png:
                 if not os.path.exists(folder):
