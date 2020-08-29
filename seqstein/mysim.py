@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from matplotlib import gridspec as gridspec
+from matplotlib import gridspec
 
 from sklearn.utils.validation import check_is_fitted
 from sklearn.base import BaseEstimator, RegressorMixin

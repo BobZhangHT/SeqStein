@@ -8,7 +8,7 @@ from sklearn.model_selection import GridSearchCV, PredefinedSplit
 from sklearn.metrics import make_scorer, mean_squared_error
 
 from matplotlib import pyplot as plt
-from matplotlib import gridspec as gridspec
+from matplotlib import gridspec
 
 from .mysim import SIM
 

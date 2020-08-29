@@ -2,7 +2,7 @@ import numpy as np
 from sklearn.utils.validation import check_is_fitted
 from sklearn.base import BaseEstimator, RegressorMixin
 from matplotlib import pyplot as plt
-from matplotlib import gridspec as gridspec
+from matplotlib import gridspec
 
 from .smspline import SMSplineRegressor
 from .mysim import SIM
