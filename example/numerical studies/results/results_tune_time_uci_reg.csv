@@ -1,0 +1,3 @@
+Dataset,SeqStein-NonOrtho,SeqStein-Ortho,AIMLow,AIMHigh,SLFN,MLP,ExNN,#Samples,#Features
+wine_white,$\mathbf{2.641}$$\pm$0.414,2.674$\pm$0.441,5.293$\pm$1.019,44.320$\pm$6.082,24.796$\pm$6.381,6.200$\pm$2.489,623.786$\pm$101.657,4898,11
+wine_red,$\mathbf{0.775}$$\pm$0.326,0.874$\pm$0.454,2.783$\pm$0.516,23.058$\pm$3.280,5.422$\pm$2.370,2.150$\pm$0.910,406.997$\pm$47.171,1599,11

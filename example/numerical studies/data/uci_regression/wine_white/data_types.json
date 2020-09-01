@@ -1,0 +1,12 @@
+{"fixed acidity":{"type":"continuous"},
+ "volatile acidity":{"type":"continuous"},
+ "citric acid":{"type":"continuous"},
+ "residual sugar":{"type":"continuous"},
+ "chlorides":{"type":"continuous"},
+ "free sulfur dioxide":{"type":"continuous"},
+ "total sulfur dioxide":{"type":"continuous"},
+ "density":{"type":"continuous"},
+ "pH":{"type":"continuous"},
+ "sulphates":{"type":"continuous"},
+ "alcohol":{"type":"continuous"},
+ "quality":{"type":"target"}}

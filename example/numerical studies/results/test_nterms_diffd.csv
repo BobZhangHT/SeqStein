@@ -1,0 +1,2 @@
+#Features,Dataset,SeqStein-NonOrtho,SeqStein-Ortho,AIMLow,AIMHigh,SLFN,MLP,ExNN,#Samples
+20,Case1,7.800$\pm$1.833,6.900$\pm$2.256,7.300$\pm$2.900,9.400$\pm$1.200,14.000$\pm$8.000,nan$\pm$nan,$\mathbf{4.300}$$\pm$0.900,10000
