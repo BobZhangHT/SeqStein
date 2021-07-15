@@ -1,2 +1,2 @@
 #Features,Dataset,SeqStein-NonOrtho,SeqStein-Ortho,AIMLow,AIMHigh,SLFN,MLP,ExNN,#Samples
-20,Case1,8.173$\pm$1.517,7.152$\pm$1.679,$\mathbf{2.751}$$\pm$0.987,46.898$\pm$13.529,36.599$\pm$8.035,10.223$\pm$2.735,195.649$\pm$52.485,10000
+20,Case1,19.534$\pm$6.068,13.426$\pm$3.063,$\mathbf{10.850}$$\pm$4.315,261.933$\pm$180.767,151.385$\pm$63.244,200.640$\pm$31.722,282.718$\pm$71.286,10000

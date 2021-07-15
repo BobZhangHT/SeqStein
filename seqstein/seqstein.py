@@ -18,6 +18,7 @@ class SeqStein(BaseEstimator, RegressorMixin):
     
     def __init__(self, nterms=5, reg_lambda=0.2,
                  reg_gamma=0, knot_num=10,
+                 stein_order=["second",'first'],
                  early_stop_thres=1, ortho_enhance=True,
                  val_ratio=0.2,
                  random_state=0):
@@ -27,6 +28,7 @@ class SeqStein(BaseEstimator, RegressorMixin):
         self.knot_num = knot_num
         self.early_stop_thres = early_stop_thres
         self.ortho_enhance = ortho_enhance
+        self.stein_order = stein_order
         self.val_ratio = val_ratio
         self.random_state = random_state
         
@@ -35,6 +37,9 @@ class SeqStein(BaseEstimator, RegressorMixin):
         
         if not isinstance(self.reg_gamma,list):
             self.reg_gamma = [self.reg_gamma]
+        
+        if not isinstance(self.stein_order,list):
+            self.stein_order = [self.stein_order]
             
     @property
     def importance_ratios_(self):
@@ -114,7 +119,7 @@ class SeqStein(BaseEstimator, RegressorMixin):
                 proj_mat = np.eye(u.shape[0]) - np.dot(u, u.T)
 
             # initialization
-            param_grid = {"method": ["second",'first'],
+            param_grid = {"method": self.stein_order,
                           "reg_lambda": self.reg_lambda,
                           "reg_gamma": self.reg_gamma}
             grid = GridSearchCV(SIM(degree=3, knot_num=self.knot_num,
@@ -245,14 +250,15 @@ class SeqStein(BaseEstimator, RegressorMixin):
             fig.add_subplot(ax2)
             subfig_idx += 1
             
+        #plt.show()
         if max_ids > 0:
             if save_png:
                 if not os.path.exists(folder):
                     os.makedirs(folder)
                 save_path = folder + name
-                f.savefig("%s.png" % save_path, bbox_inches="tight", dpi=100)
+                fig.savefig("%s.png" % save_path, bbox_inches="tight", dpi=100)
             if save_eps:
                 if not os.path.exists(folder):
                     os.makedirs(folder)
                 save_path = folder + name
-                f.savefig("%s.eps" % save_path, bbox_inches="tight", dpi=100)
+                fig.savefig("%s.eps" % save_path, bbox_inches="tight", dpi=100)

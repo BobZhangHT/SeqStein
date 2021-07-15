@@ -334,7 +334,7 @@ def mlp(train_x, train_y, test_x, val_ratio=0.2, random_state=0):
     valnum = int(round(datanum * val_ratio))
 
     idx1, idx2 = train_test_split(indices, test_size=valnum, random_state=random_state)
-    model = MLPRegressor(hidden_layer_sizes=[10, 6], max_iter=2000, batch_size=min(1000, int(np.floor(datanum * 0.20))), \
+    model = MLPRegressor(hidden_layer_sizes=[100, 60], max_iter=2000, batch_size=min(1000, int(np.floor(datanum * 0.20))), \
                   activation="tanh", early_stopping=True,
                   random_state=random_state, validation_fraction=val_ratio, n_iter_no_change=100)
     start = time.time()
@@ -368,7 +368,7 @@ def exnn(train_x, train_y, test_x, get_metric, nterms,
     
     for i, j in itertools.product(range(3), range(3)):
         model = ExNN(meta_info=meta_info, subnet_num=nterms,
-                  subnet_arch=[10, 6], task_type='Regression',
+                  subnet_arch=[100, 60], task_type='Regression',
                   activation_func=tf.tanh, batch_size=min(1000, int(train_x.shape[0] * 0.2)),
                   training_epochs=5000, lr_bp=0.001, lr_cl=0.1, beta_threshold=0.1,
                   tuning_epochs=100, l1_proj=10**(- i - 2), l1_subnet=10**(- j - 2), l2_smooth=10**(-6),

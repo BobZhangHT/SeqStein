@@ -4,5 +4,5 @@ from .smspline import SMSplineRegressor
 
 __all__ = ["SIM", "SeqStein", "SMSplineRegressor"]
 
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 __author__ = 'Hengtao Zhang and Zebin Yang'

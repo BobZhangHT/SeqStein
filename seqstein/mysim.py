@@ -1,4 +1,5 @@
 import numpy as np
+import scipy as sp
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib import gridspec
@@ -30,7 +31,9 @@ __all__ = ["SIM"]
 
 class SIM(BaseEstimator, RegressorMixin):
 
-    def __init__(self, method="second", reg_lambda=0.1, reg_gamma="GCV", knot_num=10, degree=3, random_state=0):
+    def __init__(self, method="second", reg_lambda=0.1, reg_gamma="GCV", 
+                 knot_num=10, degree=3, random_state=0, 
+                 fps_maxnvar=-1, fps_maxiter=100, fps_tol=0.1):
 
         self.method = method
         self.reg_lambda = reg_lambda # penalty of stein method
@@ -38,6 +41,9 @@ class SIM(BaseEstimator, RegressorMixin):
         self.knot_num = knot_num
         self.degree = degree
         self.random_state = random_state
+        self.fps_maxnvar = fps_maxnvar
+        self.fps_maxiter = fps_maxiter
+        self.fps_tol = fps_tol
 
     def first_stein(self, x, y, proj_mat=None):
         
@@ -49,7 +55,9 @@ class SIM(BaseEstimator, RegressorMixin):
             sigmat = np.dot(np.dot(proj_mat, sigmat), proj_mat)
             
         reg_lambda_max = np.max(np.abs(sigmat) - np.abs(sigmat) * np.eye(sigmat.shape[0]), axis=0).max()
-        spca_solver = fps.fps(sigmat, 1, 1, -1, -1, ro.r.c(self.reg_lambda * reg_lambda_max))
+        spca_solver = fps.fps(sigmat, 1, 1, self.fps_maxnvar, -1, 
+                              ro.r.c(self.reg_lambda * reg_lambda_max), 
+                              self.fps_maxiter, self.fps_tol)
         beta = np.array(fps.coef_fps(spca_solver, self.reg_lambda * reg_lambda_max))
         
         return beta
@@ -61,7 +69,10 @@ class SIM(BaseEstimator, RegressorMixin):
         sigmat = np.tensordot(s1 * y.reshape([-1, 1]), s1, axes=([0], [0])) / n_samples
         sigmat -= np.mean(y) * self.inv_cov
         # ensure the semi-positive definite
-        u,s,_ = np.linalg.svd(sigmat)
+        try:
+            u,s,_ = np.linalg.svd(sigmat)
+        except:
+            u,s,_ = sp.linalg.svd(sigmat)
         # svd in python ensure the positive singular values
         sigmat = np.dot(u*s.reshape(1,-1),u.T)
         
@@ -69,7 +80,9 @@ class SIM(BaseEstimator, RegressorMixin):
             sigmat = np.dot(np.dot(proj_mat, sigmat), proj_mat)
         
         reg_lambda_max = np.max(np.abs(sigmat) - np.abs(sigmat) * np.eye(sigmat.shape[0]), axis=0).max()
-        spca_solver = fps.fps(sigmat, 1, 1, -1, -1, ro.r.c(self.reg_lambda * reg_lambda_max))
+        spca_solver = fps.fps(sigmat, 1, 1, self.fps_maxnvar, -1, 
+                              ro.r.c(self.reg_lambda * reg_lambda_max),
+                              self.fps_maxiter, self.fps_tol)
         beta = np.array(fps.coef_fps(spca_solver, self.reg_lambda * reg_lambda_max))
         
         return beta

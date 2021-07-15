@@ -231,7 +231,7 @@ def data_generator6(datanum, val_ratio=0.2, d=10, noise_sigma=1, rand_seed=0):
 def load_regression_data(name):
     data_path = './data/'
     func_dict = {"wine_white":load_wine_white,
-             "wine_red":load_wine_red}
+                 "wine_red":load_wine_red}
     def wrapper(random_state):
         function_name_ = func_dict[name]
         x, y, task_type, meta_info = function_name_(data_path, missing_strategy="impute")
